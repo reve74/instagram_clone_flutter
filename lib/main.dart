@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone_flutter/src/app.dart';
+import 'package:instagram_clone_flutter/src/binding/init_bindings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      initialBinding: InitBinding(), // 앱 실행 시 컨트롤러들을 인스턴스로 올려줌
       home: const App(),
     );
   }
