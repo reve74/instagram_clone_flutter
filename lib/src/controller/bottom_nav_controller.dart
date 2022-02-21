@@ -8,7 +8,10 @@ import 'package:instagram_clone_flutter/src/pages/upload.dart';
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE } // 페이지별로 화면 처리
 
 class BottomNavController extends GetxController {
+  static BottomNavController get to => Get.find();
+
   RxInt pageIndex = 0.obs; // TODO: obs ?
+  GlobalKey<NavigatorState> searchPageNavigationKey = GlobalKey<NavigatorState>(); // Search페이지에서 bottomNavigationbar를 쓰기 위해서 키를 부여
   List<int> bottomHistory = [0]; // 페이지 히스토리를 관리하는 리스트
 
   void changeBottomNav(int value, {bool hasGesture = true}) {
@@ -66,6 +69,13 @@ class BottomNavController extends GetxController {
       );
       return true;
     } else {
+
+      var page = PageName.values[bottomHistory.last];
+      if(page == PageName.SEARCH) {
+        var value = await searchPageNavigationKey.currentState!.maybePop();
+        if(value) return false;
+      }
+
       bottomHistory.removeLast();
       var index = bottomHistory.last;
       changeBottomNav(index, hasGesture: false);

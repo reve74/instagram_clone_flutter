@@ -20,7 +20,12 @@ class App extends GetView<BottomNavController> {
             index: controller.pageIndex.value,
             children: [
               const Home(),
-              const Search(),
+              Navigator(
+                key: controller.searchPageNavigationKey, // Search페이지에서 bottomNavigationbar를 쓰기 위해서 키를 부여
+                onGenerateRoute: (routeSetting) {
+                  return MaterialPageRoute(builder: (context) => Search(),);
+                },
+              ),
               Container(
                 child: Center(
                     child: Text(
