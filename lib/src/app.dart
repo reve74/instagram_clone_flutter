@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone_flutter/src/controller/bottom_nav_controller.dart';
+import 'package:instagram_clone_flutter/src/pages/active_history.dart';
 import 'package:instagram_clone_flutter/src/pages/home.dart';
 import 'package:instagram_clone_flutter/src/pages/search.dart';
 import 'components/image_data.dart';
@@ -21,23 +22,16 @@ class App extends GetView<BottomNavController> {
             children: [
               const Home(),
               Navigator(
-                key: controller.searchPageNavigationKey, // Search페이지에서 bottomNavigationbar를 쓰기 위해서 키를 부여
+                key: controller.searchPageNavigationKey,
+                // Search페이지에서 bottomNavigationbar를 쓰기 위해서 키를 부여
                 onGenerateRoute: (routeSetting) {
-                  return MaterialPageRoute(builder: (context) => Search(),);
+                  return MaterialPageRoute(
+                    builder: (context) => Search(),
+                  );
                 },
               ),
-              Container(
-                child: Center(
-                    child: Text(
-                  'upload',
-                )),
-              ),
-              Container(
-                child: Center(
-                    child: Text(
-                  'activity',
-                )),
-              ),
+              Container(),
+              ActiveHistory(),
               Container(
                 child: Center(
                     child: Text(
