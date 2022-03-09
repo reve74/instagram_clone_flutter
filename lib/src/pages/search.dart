@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone_flutter/src/search/search_focus.dart';
+import 'package:instagram_clone_flutter/src/pages/search/search_focus.dart';
 import 'package:quiver/iterables.dart';
 
 class Search extends StatefulWidget {
@@ -31,7 +31,7 @@ class _SearchState extends State<Search> {
       groupBox[gi].add(size);
       groupIndex[gi] += size;
     }
-    print(groupBox);
+    // print(groupBox);
   }
 
   Widget _appbar() {
