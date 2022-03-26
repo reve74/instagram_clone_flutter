@@ -12,7 +12,7 @@ class IUser {
       nickname: json['nickname'] == null ? '' : json['nickname'] as String,
       thumbnail: json['thumbnail'] == null ? '' : json['thumbnail'] as String,
       description:
-      json['description'] == null ? '' : json['description'] as String,
+          json['description'] == null ? '' : json['description'] as String,
     );
   }
 
@@ -23,5 +23,19 @@ class IUser {
       'thumbnail': thumbnail,
       'description': description,
     };
+  }
+
+  IUser copyWith({
+    String? uid,
+    String? nickname,
+    String? thumbnail,
+    String? description,
+  }) {
+    return IUser(
+      uid: uid ?? this.uid,
+      nickname: uid ?? this.nickname,
+      thumbnail: uid ?? this.thumbnail,
+      description: uid ?? this.description,
+    );
   }
 }

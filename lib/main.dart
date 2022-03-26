@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:instagram_clone_flutter/firebase_options.dart';
 import 'package:instagram_clone_flutter/src/app.dart';
 import 'package:instagram_clone_flutter/src/binding/init_bindings.dart';
+import 'package:instagram_clone_flutter/src/pages/login.dart';
 import 'package:instagram_clone_flutter/src/root.dart';
 
 void main() async{
