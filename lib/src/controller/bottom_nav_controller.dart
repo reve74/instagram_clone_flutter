@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone_flutter/src/components/message_popup.dart';
+import 'package:instagram_clone_flutter/src/controller/upload_controller.dart';
 import 'package:instagram_clone_flutter/src/pages/upload.dart';
 
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE } // 페이지별로 화면 처리
@@ -11,7 +12,8 @@ class BottomNavController extends GetxController {
   static BottomNavController get to => Get.find();
 
   RxInt pageIndex = 0.obs; // TODO: obs ?
-  GlobalKey<NavigatorState> searchPageNavigationKey = GlobalKey<NavigatorState>(); // Search페이지에서 bottomNavigationbar를 쓰기 위해서 키를 부여
+  GlobalKey<NavigatorState> searchPageNavigationKey = GlobalKey<
+      NavigatorState>(); // Search페이지에서 bottomNavigationbar를 쓰기 위해서 키를 부여
   List<int> bottomHistory = [0]; // 페이지 히스토리를 관리하는 리스트
 
   void changeBottomNav(int value, {bool hasGesture = true}) {
@@ -20,7 +22,9 @@ class BottomNavController extends GetxController {
 
     switch (page) {
       case PageName.UPLOAD: // 업로드는 페이지 전환이 아닌 화면위에 그려짐
-        Get.to(() => Upload());
+        Get.to(() => Upload(), binding: BindingsBuilder(() {
+          Get.put(UploadController());
+        }));
         break;
       case PageName.HOME:
       case PageName.SEARCH:
@@ -69,11 +73,10 @@ class BottomNavController extends GetxController {
       );
       return true;
     } else {
-
       var page = PageName.values[bottomHistory.last];
-      if(page == PageName.SEARCH) {
+      if (page == PageName.SEARCH) {
         var value = await searchPageNavigationKey.currentState!.maybePop();
-        if(value) return false;
+        if (value) return false;
       }
 
       bottomHistory.removeLast();

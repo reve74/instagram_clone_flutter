@@ -33,9 +33,9 @@ class IUser {
   }) {
     return IUser(
       uid: uid ?? this.uid,
-      nickname: uid ?? this.nickname,
-      thumbnail: uid ?? this.thumbnail,
-      description: uid ?? this.description,
+      nickname: nickname ?? this.nickname,
+      thumbnail: thumbnail ?? this.thumbnail,
+      description: description ?? this.description,
     );
   }
 }

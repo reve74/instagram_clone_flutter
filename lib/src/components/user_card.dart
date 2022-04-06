@@ -31,9 +31,7 @@ class UserCard extends StatelessWidget {
                 AvatarWidget(
                   type: AvatarType.TYPE2,
                   thumbPath:
-                      'https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/272098298_211628487835271_4'
-                      '69254811598076339_n.jpg?stp=dst-jpg_s320x320&_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_cat=1&_nc_ohc=fAI-Xp5Xk8oAX97H_E'
-                      'o&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT-E7DyMzPgZBeGmnHMhk9_gWXhYUoSvvpXKiycxdMZf7w&oe=622EC32E&_nc_sid=7bff83',
+                      'https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/277401441_398290504969761_1634878627965687074_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_cat=1&_nc_ohc=5e1sjGCoQEEAX_l07Mf&edm=ALCvFkgBAAAA&ccb=7-4&oh=00_AT-3y7rSIK-ENRXAhdfM7KFwabL3aiZxE43CvsvtShwlvQ&oe=62536795&_nc_sid=643ae9',
                   size: 80,
                 ),
                 const SizedBox(

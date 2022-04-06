@@ -13,8 +13,7 @@ class ActiveHistory extends StatelessWidget {
             type: AvatarType.TYPE2,
             size: 40,
             thumbPath:
-                'https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/100938534_3238188736205223_599301328254009344_n.jpg?stp=dst-jpg_s150x150&_nc_ht='
-                'scontent-gmp1-1.cdninstagram.com&_nc_cat=1&_nc_ohc=XYIyvlVDl6UAX8qFXW0&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT-yt-sPm5tPhNRQQqaL3EZ1Qs0JsR4OUIrALEjEB--B9g&oe=622894A8&_nc_sid=7bff83',
+                'https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19/277401441_398290504969761_1634878627965687074_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-gmp1-1.cdninstagram.com&_nc_cat=1&_nc_ohc=5e1sjGCoQEEAX_l07Mf&edm=ALCvFkgBAAAA&ccb=7-4&oh=00_AT-3y7rSIK-ENRXAhdfM7KFwabL3aiZxE43CvsvtShwlvQ&oe=62536795&_nc_sid=643ae9',
           ),
           const SizedBox(width: 10),
           Expanded(

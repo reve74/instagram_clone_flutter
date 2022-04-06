@@ -1,24 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:instagram_clone_flutter/src/components/avatar_widget.dart';
 import 'package:instagram_clone_flutter/src/components/image_data.dart';
 import 'package:instagram_clone_flutter/src/components/user_card.dart';
+import 'package:instagram_clone_flutter/src/controller/auth_controller.dart';
+import 'package:instagram_clone_flutter/src/controller/mypage_controller.dart';
 
-class MyPage extends StatefulWidget {
+class MyPage extends GetView<MyPageController> {
   const MyPage({Key? key}) : super(key: key);
-
-  @override
-  State<MyPage> createState() => _MyPageState();
-}
-
-class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 2, vsync: this);
-  }
 
   Widget _statisticsOne(String title, int value) {
     return Column(
@@ -45,95 +35,76 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   Widget _information() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Stack(
-                children: [
-                  AvatarWidget(
-                    type: AvatarType.TYPE3,
-                    thumbPath:
-                        'https://scontent-gmp1-1.cdninstagram.com/v/t51.2885-19'
-                        '/100938534_3238188736205223_599301328254009344_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent-gmp1-1.'
-                        'cdninstagram.com&_nc_cat=1&_nc_ohc=XYIyvlVDl6UAX8qFXW0&edm=ABfd0MgBAAAA&ccb=7-'
-                        '4&oh=00_AT-yt-sPm5tPhNRQQqaL3EZ1Qs0JsR4OUIrALEjEB--B9g&oe=622894A8&_nc_sid=7bff83',
-                    size: 80,
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blue,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 4,
-                        ),
-                      ),
-                      child: const Text(
-                        '+',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          height: 1.16,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                Stack(
                   children: [
-                    Expanded(child: _statisticsOne('Post', 15)),
-                    Expanded(child: _statisticsOne('Followers', 15)),
-                    Expanded(child: _statisticsOne('Following', 15)),
+                    AvatarWidget(
+                      type: AvatarType.TYPE3,
+                      thumbPath: controller.targetUser.value.thumbnail!,
+                      size: 80,
+                    ),
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 4,
+                          ),
+                        ),
+                        child: const Text(
+                          '+',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            height: 1.05,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  const TextSpan(
-                    text: '설인아\n',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(child: _statisticsOne('Post', 15)),
+                      Expanded(child: _statisticsOne('Followers', 15)),
+                      Expanded(child: _statisticsOne('Following', 15)),
+                    ],
                   ),
-                  TextSpan(
-                    text: '배우\n',
-                    style: TextStyle(color: Colors.grey.shade600),
-                  ),
-                  const TextSpan(
-                    text: 'fROM NOW ON.',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Text(
+                controller.targetUser.value.description!,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.black,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -231,7 +202,7 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
 
   Widget _tabMenu() {
     return TabBar(
-      controller: tabController,
+      controller: controller.tabController,
       indicatorColor: Colors.black,
       indicatorWeight: 1,
       tabs: [
@@ -270,12 +241,14 @@ class _MyPageState extends State<MyPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          '_seorina',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.black,
+        title: Obx(
+          () => Text(
+            controller.targetUser.value.nickname!,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.black,
+            ),
           ),
         ),
         elevation: 0,
