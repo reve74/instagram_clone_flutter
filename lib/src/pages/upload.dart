@@ -209,6 +209,7 @@ class Upload extends GetView<UploadController> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -250,6 +251,7 @@ class Upload extends GetView<UploadController> {
             _imagePreview(),
             _header(),
             _imageSelectList(),
+
           ],
         ),
       ),

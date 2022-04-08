@@ -3,9 +3,13 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone_flutter/src/components/avatar_widget.dart';
 import 'package:instagram_clone_flutter/src/components/image_data.dart';
+import 'package:instagram_clone_flutter/src/models/post.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({Key? key}) : super(key: key);
+  final Post post;
+
+  const PostWidget({Key? key, required this.post}) : super(key: key);
 
   Widget _header() {
     return Padding(
@@ -15,9 +19,8 @@ class PostWidget extends StatelessWidget {
         children: [
           AvatarWidget(
             type: AvatarType.TYPE3,
-            nickName: 'Charlie',
-            thumbPath:
-                'https://i.pinimg.com/originals/4f/fd/f4/4ffdf44d886b79b366c27486051a1081.png',
+            nickName: post.userInfo!.nickname,
+            thumbPath: post.userInfo!.thumbnail,
             size: 30,
           ),
           GestureDetector(
@@ -36,8 +39,7 @@ class PostWidget extends StatelessWidget {
   }
 
   Widget _image() {
-    return CachedNetworkImage(
-        imageUrl: 'https://i.ytimg.com/vi/UAQT5Hgrm1Q/maxresdefault.jpg');
+    return CachedNetworkImage(imageUrl: post.thumbnail!);
   }
 
   Widget _infoCount() {
@@ -83,16 +85,16 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            '좋아요 200개',
-            style: TextStyle(
+          Text(
+            '좋아요 ${post.likeCount ?? 0}개',
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 13,
             ),
           ),
           ExpandableText(
-            '윈터윈터윈터윈터윈터윈터\n윈터윈터윈터\n윈터윈터윈터\n',
-            prefixText: 'Charlie',
+            post.description ?? '',
+            prefixText: post.userInfo!.nickname,
             onPrefixTap: () {
               print('찰리 페이지 이동');
             },
@@ -117,14 +119,11 @@ class PostWidget extends StatelessWidget {
   Widget _replyTextBtn() {
     return GestureDetector(
       onTap: () {},
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Text(
-          '댓글 100개 모두 보기',
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 13,
-          ),
+          timeago.format(post.createdAt!),
+          style: const TextStyle(color: Colors.grey, fontSize: 13),
         ),
       ),
     );

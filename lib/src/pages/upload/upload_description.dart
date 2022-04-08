@@ -19,10 +19,11 @@ class UploadDescription extends GetView<UploadController> {
               fit: BoxFit.cover,
             ),
           ),
-          const Expanded(
+          Expanded(
             child: TextField(
+              controller: controller.textEditingController,
               maxLines: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
@@ -52,6 +53,46 @@ class UploadDescription extends GetView<UploadController> {
 
   Widget get line => const Divider(color: Colors.grey);
 
+  Widget snsInfo() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Facebook',
+                style: TextStyle(fontSize: 17),
+              ),
+              Switch(value: false, onChanged: (bool value) {}),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Twitter',
+                style: TextStyle(fontSize: 17),
+              ),
+              Switch(value: false, onChanged: (bool value) {}),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Tumblr',
+                style: TextStyle(fontSize: 17),
+              ),
+              Switch(value: false, onChanged: (bool value) {}),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +115,7 @@ class UploadDescription extends GetView<UploadController> {
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: controller.uploadPost,
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: ImageData(
@@ -93,9 +134,7 @@ class UploadDescription extends GetView<UploadController> {
             top: 0,
             bottom: 0,
             child: GestureDetector(
-              onTap: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-              },
+              onTap: controller.unfocusKeyboard,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,6 +146,7 @@ class UploadDescription extends GetView<UploadController> {
                     _infoOne('위치 추가'),
                     line,
                     _infoOne('다른 미디어에서도 게시'),
+                    snsInfo(),
                   ],
                 ),
               ),
